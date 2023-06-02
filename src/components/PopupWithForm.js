@@ -1,9 +1,21 @@
 import React from "react";
 import closeButton from "../images/CloseIcon.svg";
 
-function PopupWithForm({ name, title, buttonText, children, isOpen, onClose }) {
+function PopupWithForm({
+  name,
+  title,
+  buttonText,
+  children,
+  isOpen,
+  onSubmit,
+  onClose,
+  onCloseOverlay,
+}) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}>
+    <div
+      className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}
+      onClick={onCloseOverlay}
+    >
       <div className="popup__container">
         <button className="popup__close" type="button">
           <img
@@ -13,11 +25,11 @@ function PopupWithForm({ name, title, buttonText, children, isOpen, onClose }) {
             alt="закрыть"
           />
         </button>
-        <form className="popup__form" name={name}>
+        <form className="popup__form" name={name} onSubmit={onSubmit}>
           <h2 className="popup__header">{title}</h2>
           {children}
-          <button className="popup__save popup__save_disabled" type="submit">
-            {buttonText || "Сохранить"}
+          <button className="popup__save" type="submit">
+            {buttonText}
           </button>
         </form>
       </div>
